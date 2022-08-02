@@ -1,0 +1,75 @@
+<div>
+  <h1 class="titulo">Añadir nuevo paciente</h1>
+</div>
+<form class="row g-3 form-nuevo-paciente">
+  <div class="col-md-4">
+    <label for="inputNombre" class="form-label">Nombre</label>
+    <input type="text" formControlName="nombre" class="form-control" id="inputNombre">
+  </div>
+  <div class="col-md-4">
+    <label for="inputApellido1" class="form-label">Primer apellido</label>
+    <input type="text" formControlName="apellido1" class="form-control" id="inputApellido1">
+  </div>
+  <div class="col-md-4">
+    <label for="inputApellido2" class="form-label">Segundo apellido</label>
+    <input type="text" formControlName="apellido2" class="form-control" id="inputApellido2">
+  </div>
+  <div class="col-12">
+    <div class="form-check">
+      <input class="form-check-input" formControlName="institucionalizado" type="checkbox" id="inputInstitucionalizado">
+      <label class="form-check-label" for="inputInstitucionalizado">
+        ¿El paciente está institucionalizado?
+      </label>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="inputFechaNacimiento" class="form-label">Fecha de nacimiento</label>
+    <input type="date" formControlName="fechaNacimiento" class="form-control" id="inputFechaNacimiento">
+  </div>
+  <div class="col-md-8">
+    <label for="inputDiagnostico" class="form-label">Diagnóstico</label>
+    <input type="text" formControlName="diagnostico" class="form-control" id="inputDiagnostico">
+  </div>
+  <div class="col-md-6">
+    <label for="inputFechaDiagnostico" class="form-label">Fecha del diagnóstico</label>
+    <input type="text" formControlName="fechaDiagnostico" class="form-control" id="inputFechaDiagnostico">
+  </div>
+  <div class="col-md-6">
+    <label for="inputProfesional" class="form-label">Profesional</label>
+    <input type="text" formControlName="profesional" class="form-control" id="inputProfesional">
+  </div>
+  <div class="col-12">
+    <label for="inputAddress" class="form-label">Address</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+  </div>
+  <div class="col-12">
+    <label for="inputAddress2" class="form-label">Address 2</label>
+    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+  </div>
+  <div class="col-md-6">
+    <label for="inputCity" class="form-label">City</label>
+    <input type="text" class="form-control" id="inputCity">
+  </div>
+  <div class="col-md-4">
+    <label for="inputState" class="form-label">State</label>
+    <select id="inputState" class="form-select">
+      <option selected>Choose...</option>
+      <option>...</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <label for="inputZip" class="form-label">Zip</label>
+    <input type="text" class="form-control" id="inputZip">
+  </div>
+  <div class="col-12">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">
+        Check me out
+      </label>
+    </div>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </div>
+</form>

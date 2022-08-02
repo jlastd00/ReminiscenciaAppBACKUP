@@ -1,0 +1,39 @@
+<div class="row" style="width: 90%; margin: 25px auto;">
+  <div class="col-9">
+    <h1 class="titulo">Pacientes creados</h1>
+  </div>
+  <div class="col-3 div-btn-nuevo">
+    <button routerLink="/nuevo-paciente" class="btn btn-secondary btn-nuevo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg icono-btn" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+      </svg>
+      &nbsp;
+      <span class="texto-btn">Nuevo paciente</span>
+    </button>
+  </div>
+</div>
+<table *ngIf="hayPacientes()" class="table table-striped tabla-pacientes">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Nombre y apellidos</th>
+      <th>Nacimiento</th> <!-- Fecha y lugar -->
+      <th>Diagnóstico</th>
+      <th>Fecha de alta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let paciente of pacientes">
+      <td class="text-center"><img src="{{ paciente.foto }}" alt="foto paciente"></td>
+      <td>{{ paciente.nombre }} {{ paciente.apellido1 }} {{ paciente.apellido2 }}</td>
+      <td>{{ paciente.fechaNacimiento | date:'dd/MM/yyyy' }} ({{ paciente.lugarNacimiento }}) </td>
+      <td>{{ paciente.diagnostico }}</td>
+      <td>{{ paciente.fechaAlta | date:'dd/MM/yyyy' }}</td>
+    </tr>
+  </tbody>
+</table>
+<table *ngIf="!hayPacientes()" class="table table-striped tabla-pacientes">
+  <tr class="text-center">
+    <td><h3>{{ errorListaVacia }}</h3></td>
+  </tr>
+</table>

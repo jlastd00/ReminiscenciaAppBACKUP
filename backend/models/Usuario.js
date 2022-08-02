@@ -8,8 +8,8 @@ const usuarioSchema = new Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, required: true },
-    //verifyToken: { type: String, default: "" },
-    //resetToken: { type: String, default: "" },
+    verifyToken: { type: String, default: "" },
+    resetToken: { type: String, default: "" },
     pacientes: [{
         ref: "Paciente",
         type: Schema.Types.ObjectId

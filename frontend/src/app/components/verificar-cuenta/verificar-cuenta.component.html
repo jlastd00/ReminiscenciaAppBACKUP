@@ -1,0 +1,14 @@
+<div class="row mt-6">
+  <div class="col-md-6 m-auto">
+      <h3 class="card-header">Verify Email</h3>
+      <div class="card-body">
+          <div *ngIf="emailStatus == EmailStatus.Verifying">
+              Verificando...
+          </div>
+          <div *ngIf="emailStatus == EmailStatus.Failed">
+              La verificación de su cuenta ha fallado,
+              puede intentarlo otra vez desde la página de <a routerLink="/recuperar-password">Recuperar Contraseña</a>.
+          </div>
+      </div>
+  </div>
+</div>

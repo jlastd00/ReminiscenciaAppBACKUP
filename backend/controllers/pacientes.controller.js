@@ -8,7 +8,7 @@ export async function obtenerPacientes(req, res) {
             .status(409)
             .json({
                 resultado: "ERROR",
-                mensaje: "No hay pacientes en la base de datos",
+                mensaje: "No hay ningún paciente creado",
             });
     }
     return res.status(200).json({ resultado: "OK", pacientes: pacientes });
