@@ -1,0 +1,27 @@
+<div class="row" style="width: 70%; margin: 25px auto;">
+  <div class="col-md-9">
+    <h1 class="titulo">Lista de pacientes</h1>
+  </div>
+  <div class="col-md-3 text-end">
+    <h3>Usuario: {{ usuario.nombre }}</h3>
+  </div>
+</div>
+<table *ngIf="hayPacientes()" class="table table-striped tabla-inicio">
+  <thead>
+    <tr>
+      <th class="text-center">Paciente</th>
+      <th>Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let paciente of usuario.pacientes">
+      <td class="text-center"><img src="{{ paciente.foto }}" alt="foto paciente"></td>
+      <td>{{ paciente.nombre }}</td>
+    </tr>
+  </tbody>
+</table>
+<table *ngIf="!hayPacientes()" class="table table-striped tabla-inicio">
+  <tr class="text-center">
+    <td><h3>No tienes ningún paciente asignado</h3></td>
+  </tr>
+</table>

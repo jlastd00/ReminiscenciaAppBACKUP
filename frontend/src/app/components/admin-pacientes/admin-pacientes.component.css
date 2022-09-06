@@ -1,0 +1,13 @@
+.div-btn-nuevo {
+  text-align: end;
+}
+
+.btn-nuevo button {
+  color: #ccc;
+  padding: 10px;
+}
+
+.tabla-pacientes {
+  width: 90%;
+  margin: auto;
+}
