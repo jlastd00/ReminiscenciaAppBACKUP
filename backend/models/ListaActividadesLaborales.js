@@ -9,3 +9,4 @@ const listaActividadesLaboralesSchema = new Schema({
 });
 
 export default model('ListaActividadesLaborales', listaActividadesLaboralesSchema);
+

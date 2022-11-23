@@ -15,3 +15,4 @@ const terapiaSchema = new Schema({
 });
 
 export default model('Terapia', terapiaSchema);
+

@@ -26,7 +26,7 @@ export class RegistrarUsuarioComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       repassword: ['', [Validators.required, Validators.minLength(6)]],
-      role: ['Tipo de usuario', Validators.pattern("TERAPEUTA|FAMILIAR")]
+      role: ['Selecciona tipo de usuario', Validators.pattern("TERAPEUTA|FAMILIAR")]
     });
   }
 

@@ -20,3 +20,4 @@ const recursoSchema = new Schema({
 });
 
 export default model('Recurso', recursoSchema);
+
