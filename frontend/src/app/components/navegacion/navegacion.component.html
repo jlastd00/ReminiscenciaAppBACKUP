@@ -1,5 +1,42 @@
-<nav class="navbar navbar-expand-md bg-light">
-  <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid" style="width: 80%;">
+    <a class="navbar-brand" href="/">App Reminiscencia</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li *ngIf="loggedIn()" class="nav-item">
+          <a class="nav-link" routerLink="/inicio" routerLinkActive="active">Inicio</a>
+        </li>
+        <li *ngIf="loggedIn()" class="nav-item">
+            <a class="nav-link" routerLink="/admin-pacientes" routerLinkActive="active">Administrar pacientes</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <ul class="navbar-nav ml-auto">
+          <li *ngIf="!loggedIn()" class="nav-item">
+            <a class="nav-link" routerLink="login" routerLinkActive="active">Iniciar Sesión</a>
+          </li>
+          <li *ngIf="loggedIn()" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              {{ usuario.nombre }}
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Perfil</a>
+              <a class="dropdown-item" href="#">Configuración</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" (click)="logOut()" style="cursor: pointer;">Cerrar Sesión</a>
+            </div>
+          </li>
+        </ul>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
       <a class="navbar-brand" href="/">App Reminiscencia</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -14,7 +51,7 @@
               </li>
               <!-- <li *ngIf="loggedIn()" class="nav-item">
                   <a class="nav-link" routerLink="profile" routerLinkActive="active">Profile</a>
-              </li> -->
+              </li>
           </ul>
           <ul class="navbar-nav ms-auto">
             <li *ngIf="!loggedIn()" class="nav-item">
@@ -36,4 +73,4 @@
           </ul>
       </div>
   </div>
-</nav>
+</nav> -->

@@ -9,3 +9,4 @@ const listaPruebasSchema = new Schema({
 });
 
 export default model('ListaPruebas', listaPruebasSchema);
+

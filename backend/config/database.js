@@ -7,3 +7,4 @@ mongoose.connect(properties.DB, {
 })
     .then(db => console.log('Connected to', properties.DB))
     .catch(err => console.error(err));
+

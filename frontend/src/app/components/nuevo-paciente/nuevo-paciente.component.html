@@ -1,75 +1,649 @@
-<div>
-  <h1 class="titulo">Añadir nuevo paciente</h1>
+<div class="row div-titulo">
+  <div class="col">
+    <h2 class="titulo-pagina">Añadir nuevo paciente</h2>
+  </div>
 </div>
-<form class="row g-3 form-nuevo-paciente">
-  <div class="col-md-4">
-    <label for="inputNombre" class="form-label">Nombre</label>
-    <input type="text" formControlName="nombre" class="form-control" id="inputNombre">
-  </div>
-  <div class="col-md-4">
-    <label for="inputApellido1" class="form-label">Primer apellido</label>
-    <input type="text" formControlName="apellido1" class="form-control" id="inputApellido1">
-  </div>
-  <div class="col-md-4">
-    <label for="inputApellido2" class="form-label">Segundo apellido</label>
-    <input type="text" formControlName="apellido2" class="form-control" id="inputApellido2">
-  </div>
-  <div class="col-12">
-    <div class="form-check">
-      <input class="form-check-input" formControlName="institucionalizado" type="checkbox" id="inputInstitucionalizado">
-      <label class="form-check-label" for="inputInstitucionalizado">
-        ¿El paciente está institucionalizado?
-      </label>
+
+<div class="row mx-auto" style="width: 75%;">
+
+  <form [formGroup]="formDatosPersonales" style="border: 1px solid blue;">
+
+    <h5 class="mb-3">Datos personales</h5>
+
+    <div class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Primer apellido</label>
+        <input type="text" class="form-control" formControlName="apellido1" placeholder="Primer apellido" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Segundo apellido</label>
+        <input type="text" class="form-control" formControlName="apellido2" placeholder="Segundo apellido" required>
+      </div>
     </div>
-  </div>
-  <div class="col-md-4">
-    <label for="inputFechaNacimiento" class="form-label">Fecha de nacimiento</label>
-    <input type="date" formControlName="fechaNacimiento" class="form-control" id="inputFechaNacimiento">
-  </div>
-  <div class="col-md-8">
-    <label for="inputDiagnostico" class="form-label">Diagnóstico</label>
-    <input type="text" formControlName="diagnostico" class="form-control" id="inputDiagnostico">
-  </div>
-  <div class="col-md-6">
-    <label for="inputFechaDiagnostico" class="form-label">Fecha del diagnóstico</label>
-    <input type="text" formControlName="fechaDiagnostico" class="form-control" id="inputFechaDiagnostico">
-  </div>
-  <div class="col-md-6">
-    <label for="inputProfesional" class="form-label">Profesional</label>
-    <input type="text" formControlName="profesional" class="form-control" id="inputProfesional">
-  </div>
-  <div class="col-12">
-    <label for="inputAddress" class="form-label">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-  </div>
-  <div class="col-12">
-    <label for="inputAddress2" class="form-label">Address 2</label>
-    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-  </div>
-  <div class="col-md-6">
-    <label for="inputCity" class="form-label">City</label>
-    <input type="text" class="form-control" id="inputCity">
-  </div>
-  <div class="col-md-4">
-    <label for="inputState" class="form-label">State</label>
-    <select id="inputState" class="form-select">
-      <option selected>Choose...</option>
-      <option>...</option>
-    </select>
-  </div>
-  <div class="col-md-2">
-    <label for="inputZip" class="form-label">Zip</label>
-    <input type="text" class="form-control" id="inputZip">
-  </div>
-  <div class="col-12">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
+
+    <div class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Fotografía</label>
+        <input class="form-control"
+          (change)="onFileChange($event)" type="file" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Fecha de nacimiento</label>
+        <input type="date" class="form-control"
+          formControlName="fechaNacimiento"
+          placeholder="Fecha de nacimiento" required>
+      </div>
     </div>
-  </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </div>
-</form>
+
+    <div class="row form-group mb-3">
+      <div class="col-2">
+        <label class="form-label">¿Institucionalizado?</label>
+      </div>
+      <div class="col">
+        <input class="form-check-input" type="checkbox"
+          formControlName="institucionalizado" (change)="cambiarInstitucion()">
+      </div>
+    </div>
+
+    <div *ngIf="!tieneInstitucion" class="row mb-3">
+      <h5>Dirección</h5>
+      <div class="row form-group mb-3">
+        <div class="col-8">
+          <label class="form-label">Nombre vía</label>
+          <input type="text" class="form-control" formControlName="nombreVia" placeholder="Nombre vía">
+        </div>
+        <div class="col-4">
+          <label class="form-label">Número</label>
+          <input type="number" class="form-control" formControlName="numero" placeholder="Número">
+        </div>
+      </div>
+      <div class="row form-group mb-3">
+        <div class="col">
+          <label class="form-label">Piso y letra</label>
+          <input type="text" class="form-control" formControlName="pisoYletra" placeholder="Piso y letra">
+        </div>
+        <div class="col">
+          <label class="form-label">Localidad</label>
+          <input type="text" class="form-control" formControlName="localidad" placeholder="Localidad">
+        </div>
+        <div class="col">
+          <label class="form-label">Provincia</label>
+          <input type="text" class="form-control" formControlName="provincia" placeholder="Provincia">
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="tieneInstitucion" class="row form-group mb-3">
+      <h5>Institución</h5>
+      <div class="col">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" formControlName="nombreInstitucion" placeholder="Nombre">
+      </div>
+      <div class="col">
+        <label class="form-label">Localidad</label>
+        <input type="text" class="form-control" formControlName="localidadInstitucion" placeholder="Localidad">
+      </div>
+      <div class="col">
+        <label class="form-label">Fecha de ingreso</label>
+        <input type="date" class="form-control" formControlName="fechaIngreso" placeholder="Fecha de ingreso">
+      </div>
+    </div>
+
+  </form>
+
+  <form [formGroup]="formDiagnosticosYpruebas" style="border: 1px solid blue;">
+
+    <h5>Diagnósticos y pruebas</h5>
+
+    <div class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Diagnóstico</label>
+        <input type="text" class="form-control"
+          formControlName="diagnostico1"
+          placeholder="Diagnóstico" required>
+      </div>
+    </div>
+    <div class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Profesional</label>
+        <input type="text" class="form-control"
+          formControlName="profesional1"
+          placeholder="Profesional" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Fecha del diagnóstico</label>
+        <input type="date" class="form-control"
+        formControlName="fechaDiagnostico1"
+          placeholder="Fecha del diagnóstico" required>
+      </div>
+    </div>
+
+    <div *ngIf="diagnostico_2" class="row">
+      <div class="row form-group mb-3">
+        <div class="col">
+          <label class="form-label">Diagnóstico</label>
+          <input type="text" class="form-control"
+            formControlName="diagnostico2"
+            placeholder="Diagnóstico" required>
+        </div>
+      </div>
+      <div class="row form-group mb-3">
+        <div class="col">
+          <label class="form-label">Profesional</label>
+          <input type="text" class="form-control"
+            formControlName="profesional2"
+            placeholder="Profesional" required>
+        </div>
+        <div class="col">
+          <label class="form-label">Fecha del diagnóstico</label>
+          <input type="date" class="form-control"
+          formControlName="fechaDiagnostico2"
+            placeholder="Fecha del diagnóstico" required>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="diagnostico_3" class="row mb-3">
+      <div class="row form-group mb-3">
+        <div class="col">
+          <label class="form-label">Diagnóstico</label>
+          <input type="text" class="form-control"
+            formControlName="diagnostico3"
+            placeholder="Diagnóstico" required>
+        </div>
+      </div>
+      <div class="row form-group mb-3">
+        <div class="col">
+          <label class="form-label">Profesional</label>
+          <input type="text" class="form-control"
+            formControlName="profesional3"
+            placeholder="Profesional" required>
+        </div>
+        <div class="col">
+          <label class="form-label">Fecha del diagnóstico</label>
+          <input type="date" class="form-control"
+          formControlName="fechaDiagnostico3"
+            placeholder="Fecha del diagnóstico" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group mb-3">
+      <div class="col" style="text-align: right;">
+        <button (click)="addDiagnostico()" class="btn btn-primary">Añadir diagnóstico</button>
+      </div>
+    </div>
+
+    <h5>Pruebas</h5>
+
+    <div class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Prueba</label>
+        <select class="form-select" formControlName="nombrePrueba1">
+          <option selected> Prueba </option>
+          <option *ngFor="let p of listaPruebas" value="{{ p.prueba }}">
+            {{ p.prueba }}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">Fecha de la prueba</label>
+        <input type="date" class="form-control"
+          formControlName="fechaPrueba1"
+          placeholder="Fecha de la prueba">
+      </div>
+    </div>
+
+    <div *ngIf="prueba2" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Prueba</label>
+        <select class="form-select" formControlName="nombrePrueba2">
+          <option selected> Prueba </option>
+          <option *ngFor="let p of listaPruebas" value="{{ p.prueba }}">
+            {{ p.prueba }}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">Fecha de la prueba</label>
+        <input type="date" class="form-control"
+          formControlName="fechaPrueba2"
+          placeholder="Fecha de la prueba">
+      </div>
+    </div>
+
+    <div *ngIf="prueba3" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Prueba</label>
+        <select class="form-select" formControlName="nombrePrueba3">
+          <option selected> Prueba </option>
+          <option *ngFor="let p of listaPruebas" value="{{ p.prueba }}">
+            {{ p.prueba }}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">Fecha de la prueba</label>
+        <input type="date" class="form-control"
+          formControlName="fechaPrueba3"
+          placeholder="Fecha de la prueba">
+      </div>
+    </div>
+
+    <div class="row form-group mb-3">
+      <div class="col" style="text-align: right;">
+        <button (click)="addPrueba()" class="btn btn-primary">Añadir prueba</button>
+      </div>
+    </div>
+
+  </form>
+
+  <form [formGroup]="formHistoriaVida" style="border: 1px solid blue;">
+
+    <h5 class="mb-3">Historia de vida</h5>
+
+    <div class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Lugar de nacimiento</label>
+        <input type="text" class="form-control"
+          formControlName="lugarNacimiento"
+          placeholder="Lugar de nacimiento" required>
+      </div>
+    </div>
+
+    <h5 class="mb-3">Lugares de residencia</h5>
+
+    <div class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Desde (año ó mes/año)</label>
+        <input type="text" class="form-control"
+          formControlName="fechaDesde1"
+          placeholder="aaaa ó mm/aaaa" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Hasta (año ó mes/año)</label>
+        <input type="text" class="form-control"
+          formControlName="fechaHasta1"
+          placeholder="aaaa ó mm/aaaa" required>
+      </div>
+    </div>
+    <div class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Localidad</label>
+        <input type="text" class="form-control"
+          formControlName="localidadResidencia1"
+          placeholder="Localidad" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Provincia</label>
+        <input type="text" class="form-control"
+          formControlName="provinciaResidencia1"
+          placeholder="Provincia" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Pais</label>
+        <input type="text" class="form-control"
+          formControlName="paisResidencia1"
+          placeholder="Pais" required>
+      </div>
+    </div>
+
+    <div *ngIf="lugarResidencia2" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Desde (año ó mes/año)</label>
+        <input type="text" class="form-control"
+          formControlName="fechaDesde2"
+          placeholder="aaaa ó mm/aaaa">
+      </div>
+      <div class="col">
+        <label class="form-label">Hasta (año ó mes/año)</label>
+        <input type="text" class="form-control"
+          formControlName="fechaHasta2"
+          placeholder="aaaa ó mm/aaaa">
+      </div>
+    </div>
+    <div *ngIf="lugarResidencia2" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Localidad</label>
+        <input type="text" class="form-control"
+          formControlName="localidadResidencia2"
+          placeholder="Localidad">
+      </div>
+      <div class="col">
+        <label class="form-label">Provincia</label>
+        <input type="text" class="form-control"
+          formControlName="provinciaResidencia2"
+          placeholder="Provincia">
+      </div>
+      <div class="col">
+        <label class="form-label">Pais</label>
+        <input type="text" class="form-control"
+          formControlName="paisResidencia2"
+          placeholder="Pais">
+      </div>
+    </div>
+
+    <div *ngIf="lugarResidencia3" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Desde (año ó mes/año)</label>
+        <input type="text" class="form-control"
+          formControlName="fechaDesde3"
+          placeholder="aaaa ó mm/aaaa">
+      </div>
+      <div class="col">
+        <label class="form-label">Hasta (año ó mes/año)</label>
+        <input type="text" class="form-control"
+          formControlName="fechaHasta3"
+          placeholder="aaaa ó mm/aaaa">
+      </div>
+    </div>
+    <div *ngIf="lugarResidencia3" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Localidad</label>
+        <input type="text" class="form-control"
+          formControlName="localidadResidencia3"
+          placeholder="Localidad">
+      </div>
+      <div class="col">
+        <label class="form-label">Provincia</label>
+        <input type="text" class="form-control"
+          formControlName="provinciaResidencia3"
+          placeholder="Provincia">
+      </div>
+      <div class="col">
+        <label class="form-label">Pais</label>
+        <input type="text" class="form-control"
+          formControlName="paisResidencia3"
+          placeholder="Pais">
+      </div>
+    </div>
+
+    <div class="row form-group mb-3">
+      <div class="col" style="text-align: right;">
+        <button (click)="addLugarResidencia()" class="btn btn-primary">Añadir lugar de residencia</button>
+      </div>
+    </div>
+
+    <div class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Nivel de estudios</label>
+        <select class="form-select" formControlName="nivelEstudios" (change)="introducirEstudios()" required>
+          <option selected> Nivel de estudios </option>
+          <option value="PRIMARIOS">Primarios</option>
+          <option value="SECUNDARIOS/FP">Secundarios/FP</option>
+          <option value="SUPERIORES">Superiores</option>
+        </select>
+      </div>
+    </div>
+
+    <h5 *ngIf="estudiosPrimOrSec || estudiosSuperiores" class="mb-3">Estudios</h5>
+
+    <div *ngIf="estudiosPrimOrSec" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Institución</label>
+        <input type="text" class="form-control"
+          formControlName="institucionEstudios"
+          placeholder="Institución">
+      </div>
+      <div class="col">
+        <label class="form-label">Localidad</label>
+        <input type="text" class="form-control"
+          formControlName="localidadEstudios"
+          placeholder="Localidad">
+      </div>
+    </div>
+    <div *ngIf="estudiosPrimOrSec" class="row mb-3">
+      <div class="col">
+        <label class="form-label">Fecha inicio</label>
+        <input type="text" class="form-control"
+          formControlName="fechaInicioEstudios"
+          placeholder="Fecha inicio">
+      </div>
+      <div class="col">
+        <label class="form-label">Fecha finalización</label>
+        <input type="text" class="form-control"
+          formControlName="fechaFinEstudios"
+          placeholder="Fecha finalización">
+      </div>
+    </div>
+
+    <div *ngIf="estudiosSuperiores" class="row mb-3">
+      <div class="col">
+        <label class="form-label">Institución</label>
+        <input type="text" class="form-control"
+          formControlName="institucionEstudios"
+          placeholder="Institución">
+      </div>
+      <div class="col">
+        <label class="form-label">Localidad</label>
+        <input type="text" class="form-control"
+          formControlName="localidadEstudios"
+          placeholder="Localidad">
+      </div>
+      <div class="col">
+        <label class="form-label">Titulación</label>
+        <input type="text" class="form-control"
+          formControlName="titulacionEstudios"
+          placeholder="Titulación">
+      </div>
+    </div>
+    <div *ngIf="estudiosSuperiores" class="row mb-3">
+      <div class="col">
+        <label class="form-label">Fecha inicio</label>
+        <input type="text" class="form-control"
+          formControlName="fechaInicioEstudios"
+          placeholder="Fecha inicio">
+      </div>
+      <div class="col">
+        <label class="form-label">Fecha finalización</label>
+        <input type="text" class="form-control"
+          formControlName="fechaFinEstudios"
+          placeholder="Fecha finalización">
+      </div>
+    </div>
+
+    <h5>Actividad laboral</h5>
+
+    <div class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Actividad</label>
+        <select class="form-select" formControlName="actividadLaboral1" required>
+          <option selected> Actividad </option>
+          <option *ngFor="let a of listaActLaborales" value="{{ a.actividad }}">
+            {{ a.actividad }}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">Empresa</label>
+        <input type="text" class="form-control"
+          formControlName="empresaLaboral1" placeholder="Empresa" required>
+      </div>
+    </div>
+    <div class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Localidad</label>
+        <input type="text" class="form-control"
+          formControlName="localidadLaboral1" placeholder="Localidad" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Provincia</label>
+        <input type="text" class="form-control"
+          formControlName="provinciaLaboral1" placeholder="Provincia" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Pais</label>
+        <input type="text" class="form-control"
+          formControlName="paisLaboral1" placeholder="Pais" required>
+      </div>
+    </div>
+    <div class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Fecha inicio (año ó mes/año)</label>
+        <input type="text" class="form-control"
+          formControlName="fechaInicioLaboral1" placeholder="aaaa ó mm/aaaa" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Fecha fin (año ó mes/año)</label>
+        <input type="text" class="form-control"
+          formControlName="fechaFinLaboral1" placeholder="aaaa ó mm/aaaa" required>
+      </div>
+    </div>
+
+    <div *ngIf="actividadLaboral2" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Actividad</label>
+        <select class="form-select" formControlName="actividadLaboral2" required>
+          <option selected> Actividad </option>
+          <option *ngFor="let a of listaActLaborales" value="{{ a.actividad }}">
+            {{ a.actividad }}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">Empresa</label>
+        <input type="text" class="form-control"
+          formControlName="empresaLaboral2" placeholder="Empresa" required>
+      </div>
+    </div>
+    <div *ngIf="actividadLaboral2" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Localidad</label>
+        <input type="text" class="form-control"
+          formControlName="localidadLaboral2" placeholder="Localidad" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Provincia</label>
+        <input type="text" class="form-control"
+          formControlName="provinciaLaboral2" placeholder="Provincia" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Pais</label>
+        <input type="text" class="form-control"
+          formControlName="paisLaboral2" placeholder="Pais" required>
+      </div>
+    </div>
+    <div *ngIf="actividadLaboral2" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Fecha inicio (año ó mes/año)</label>
+        <input type="text" class="form-control"
+          formControlName="fechaInicioLaboral2" placeholder="aaaa ó mm/aaaa" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Fecha fin (año ó mes/año)</label>
+        <input type="text" class="form-control"
+          formControlName="fechaFinLaboral2" placeholder="aaaa ó mm/aaaa" required>
+      </div>
+    </div>
+
+    <div *ngIf="actividadLaboral3" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Actividad</label>
+        <select class="form-select" formControlName="actividadLaboral3" required>
+          <option selected> Actividad </option>
+          <option *ngFor="let a of listaActLaborales" value="{{ a.actividad }}">
+            {{ a.actividad }}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label">Empresa</label>
+        <input type="text" class="form-control"
+          formControlName="empresaLaboral3" placeholder="Empresa" required>
+      </div>
+    </div>
+    <div *ngIf="actividadLaboral3" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Localidad</label>
+        <input type="text" class="form-control"
+          formControlName="localidadLaboral3" placeholder="Localidad" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Provincia</label>
+        <input type="text" class="form-control"
+          formControlName="provinciaLaboral3" placeholder="Provincia" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Pais</label>
+        <input type="text" class="form-control"
+          formControlName="paisLaboral3" placeholder="Pais" required>
+      </div>
+    </div>
+    <div *ngIf="actividadLaboral3" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Fecha inicio (año ó mes/año)</label>
+        <input type="text" class="form-control"
+          formControlName="fechaInicioLaboral3" placeholder="aaaa ó mm/aaaa" required>
+      </div>
+      <div class="col">
+        <label class="form-label">Fecha fin (año ó mes/año)</label>
+        <input type="text" class="form-control"
+          formControlName="fechaFinLaboral3" placeholder="aaaa ó mm/aaaa" required>
+      </div>
+    </div>
+
+    <div class="row form-group mb-3">
+      <div class="col" style="text-align: right;">
+        <button (click)="addActividadLaboral()" class="btn btn-primary">Añadir actividad</button>
+      </div>
+    </div>
+
+    <h5>Aficiones</h5>
+
+    <div class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Afición</label>
+        <input type="text" class="form-control"
+          formControlName="aficion1" placeholder="Afición" required>
+      </div>
+    </div>
+
+    <div *ngIf="aficion_2" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Afición</label>
+        <input type="text" class="form-control"
+          formControlName="aficion2" placeholder="Afición">
+      </div>
+    </div>
+
+    <div *ngIf="aficion_3" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Afición</label>
+        <input type="text" class="form-control"
+          formControlName="aficion3" placeholder="Afición">
+      </div>
+    </div>
+
+    <div *ngIf="aficion_4" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Afición</label>
+        <input type="text" class="form-control"
+          formControlName="aficion4" placeholder="Afición">
+      </div>
+    </div>
+
+    <div *ngIf="aficion_5" class="row form-group mb-3">
+      <div class="col">
+        <label class="form-label">Afición</label>
+        <input type="text" class="form-control"
+          formControlName="aficion5" placeholder="Afición">
+      </div>
+    </div>
+
+    <div class="row form-group mb-3">
+      <div class="col" style="text-align: right;">
+        <button (click)="addAficion()" class="btn btn-primary">Añadir afición</button>
+      </div>
+    </div>
+
+  </form>
+
+  <!-- <form [formGroup]="formTerapiasAsociadas" style="border: 1px solid blue;">
+
+  </form> -->
+
+</div>

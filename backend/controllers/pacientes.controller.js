@@ -39,14 +39,14 @@ export async function guardarPaciente(req, res) {
     const {
         foto, fechaNacimiento,  nombre, apellido1, apellido2,
         fechaAlta, institucionalizado, institucion, direccion,
-        diagnostico, profesional, fechaDiagnostico, valoracionesYpruebas,
+        diagnosticos, valoracionesYpruebas,
         lugarNacimiento, lugarResidencia, nivelEstudios, estudios,
         actividadLaboral,  aficiones, terapias
     } = req.body;
 
     // Validaciones
     if (!foto || !fechaNacimiento || !nombre || !apellido1 || !fechaAlta ||
-        !institucionalizado || !diagnostico || !profesional || !fechaDiagnostico ||
+        !institucionalizado ||
         !lugarNacimiento || !lugarResidencia || !nivelEstudios ||
         !estudios || !actividadLaboral || !aficiones || !terapias
     ) {
@@ -68,7 +68,7 @@ export async function guardarPaciente(req, res) {
         institucionalizado: institucionalizado,
         institucion: institucion,
         direccion: direccion,
-        diagnostico: diagnostico,
+        diagnosticos: diagnosticos,
         profesional: profesional,
         fechaDiagnostico: fechaDiagnostico,
         valoracionesYpruebas: valoracionesYpruebas,
